@@ -7,9 +7,13 @@ typedef struct System_Information{
     unsigned long long memoryLoad;
 
     //CPU information
-    char CPU[48];
+    char CPU[49];
+
     //GPU information
-    char GPU[100];
+    wchar_t GPU1[128];
+    unsigned long long totalVRAM1;
+    wchar_t GPU2[128];
+    unsigned long long totalVRAM2;
 
     //OS based system information
     char OS[100];

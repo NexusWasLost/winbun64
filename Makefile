@@ -1,8 +1,10 @@
 CC = gcc
 
-SourceFiles = ./src/duckz.c ./src/memory.c
+DXGI_FLAGS = -ldxgi -ldxguid -lole32
 
-all: duckz.exe
+SourceFiles = ./src/main.c ./src/memory.c ./src/gpu.c ./src/cpu.c
 
-duckz.exe:
-	$(CC) $(SourceFiles) -o duckz
+all: winfetch.exe
+
+winfetch.exe:
+	$(CC) $(SourceFiles) $(DXGI_FLAGS) -o winfetch
