@@ -1,5 +1,13 @@
 #pragma once
 
+typedef struct Display_Monitors{
+
+    int width;
+    int height;
+    int refreshRate;
+
+}display;
+
 typedef struct System_Information{
     //Memory Information (RAM)
     unsigned long long totalMemory;
@@ -16,10 +24,17 @@ typedef struct System_Information{
     unsigned long long totalVRAM2;
 
     //OS based system information
-    char OS[100];
-    char host[30];
-    char locale[30];
-    char resolution[15];
-    long uptime;
+    char OS_ProductName[64];
+    char OS_version[8];
+    char OS_buildNumber[32];
+
+    char host[16];
+    wchar_t locale[16];
+    unsigned long long uptime;
+    char currentUserName[32];
+
+    //monitors
+    display monitors[4];
+    int displayCount;
 
 } sysInfo;

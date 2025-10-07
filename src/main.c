@@ -21,6 +21,41 @@ int main(){
     }
 
     getCPU(&system);
-    printf("CPU: %s", system.CPU);
+    printf("CPU: %s\n", system.CPU);
+
+    getOS(&system);
+    printf("OS: %s %s (build %s.%d)\n", system.OS_ProductName, system.OS_version, system.OS_buildNumber);
+
+    getLocale(&system);
+    wprintf(L"Locale: %ls\n", system.locale);
+
+    getHostName(&system);
+    printf("Host: %s\n", system.host);
+
+    getUptime(&system);
+    double minutes = (system.uptime / 1000) / 60;
+    printf("Uptime: %d hours %d minutes\n", (int)(minutes / 60), (int)minutes % 60);
+
+    getDisplay(&system);
+    printf("Resolution: ");
+    for(unsigned x = 0; x < system.displayCount; x++){
+        //check for last display and dont end with a comma
+        if(x == system.displayCount - 1){
+            printf("%dx%d @ %dHz\n",
+            system.monitors[x].width,
+            system.monitors[x].height,
+            system.monitors[x].refreshRate);
+            break;
+        }
+
+        printf("%dx%d @ %dHz, ",
+            system.monitors[x].width,
+            system.monitors[x].height,
+            system.monitors[x].refreshRate);
+    }
+
+    getCurrentUsername(&system);
+    printf("User: %s", system.currentUserName);
+
     return 0;
 }
