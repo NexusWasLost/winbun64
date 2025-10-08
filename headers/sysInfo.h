@@ -1,4 +1,9 @@
 #pragma once
+#ifndef SYSINFO_H
+
+#define OS_PRODUCT_NAME_SIZE 64
+#define OS_BUILD_NUMBER_SIZE 32
+#define OS_VERSION_SIZE 8
 
 typedef struct Display_Monitors{
 
@@ -24,9 +29,9 @@ typedef struct System_Information{
     unsigned long long totalVRAM2;
 
     //OS based system information
-    char OS_ProductName[64];
-    char OS_version[8];
-    char OS_buildNumber[32];
+    char OS_ProductName[OS_PRODUCT_NAME_SIZE];
+    char OS_version[OS_VERSION_SIZE];
+    char OS_buildNumber[OS_BUILD_NUMBER_SIZE];
 
     char host[16];
     wchar_t locale[16];
@@ -38,3 +43,5 @@ typedef struct System_Information{
     int displayCount;
 
 } sysInfo;
+
+#endif

@@ -4,6 +4,28 @@
 #include "../headers/sysInfo.h"
 #include "../headers/sysFunctions.h"
 
+void setOSProductName(int majorBuildNumber, sysInfo* system, char* productName){
+    if(majorBuildNumber >= 22000){
+        //The string "Windows 11" is total 10 chars + 1 char ('\0') and we store it in an array.
+        //Copy the 12 bytes and the last one 11th index is '\0'.
+        //The 11th index in the productName array is the space after major windows number and we overwrite previous null terminator and continue to append from the space.
+        char win11[12] = "Windows 11";
+        memcpy(system->OS_ProductName, win11, 12);
+        memcpy(system->OS_ProductName + 11, productName + 11, OS_PRODUCT_NAME_SIZE - 11);
+    }
+    else{
+        memcpy(system->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
+    }
+}
+
+void setOSVersion(sysInfo* system, char* versionNumber){
+    memcpy(system->OS_version, versionNumber, OS_VERSION_SIZE);
+}
+
+void setOSBuildNumber(sysInfo* system, char* buildNumber){
+    memcpy(system->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
+}
+
 void getOS(sysInfo* system){
     HKEY hkey;
     char productName[64];
@@ -89,9 +111,15 @@ void getOS(sysInfo* system){
         return;
     }
 
-    memcpy(system->OS_ProductName, productName, 64);
-    memcpy(system->OS_version, versionNumber, 8);
-    memcpy(system->OS_buildNumber, buildNumber, 32);
+    //check major build for windows 11
+    int major = atoi(buildNumber);
+    setOSProductName(major, system, productName);
+    setOSVersion(system, versionNumber);
+    setOSBuildNumber(system, buildNumber);
+
+    system->OS_ProductName[63] = '\0';
+    system->OS_buildNumber[31] = '\0';
+    system->OS_version[7] = '\0';
 
     RegCloseKey(hkey);
 }

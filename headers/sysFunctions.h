@@ -1,4 +1,5 @@
 #pragma once
+#ifndef SYSFUNCTIONS_H
 
 #include "sysInfo.h"
 
@@ -11,3 +12,5 @@ void getHostName(sysInfo* system);
 void getUptime(sysInfo* system);
 void getDisplay(sysInfo* system);
 void getCurrentUsername(sysInfo* system);
+
+#endif

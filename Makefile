@@ -1,10 +1,11 @@
-CC = gcc
-
 DXGI_FLAGS = -ldxgi -ldxguid -lole32
 
-SourceFiles = ./src/main.c ./src/memory.c ./src/gpu.c ./src/cpu.c ./src/OS.c ./src/locale.c ./src/hostname.c ./src/uptime.c ./src/display.c ./src/username.c
+SourceFiles = main.o gpu.o cpu.o memory.o OS.o locale.o hostname.o uptime.o display.o username.o
 
 all: winfetch.exe
 
-winfetch.exe:
-	$(CC) $(SourceFiles) $(DXGI_FLAGS) -o winfetch
+%.o: ./src/%.c
+	gcc -c $< -o $@
+
+winfetch.exe: $(SourceFiles)
+	gcc $(SourceFiles) $(DXGI_FLAGS) -o winfetch.exe
