@@ -7,23 +7,23 @@
 void setOSProductName(int majorBuildNumber, sysInfo* system, char* productName){
     if(majorBuildNumber >= 22000){
         //The string "Windows 11" is total 10 chars + 1 char ('\0') and we store it in an array.
-        //Copy the 12 bytes and the last one 11th index is '\0'.
-        //The 11th index in the productName array is the space after major windows number and we overwrite previous null terminator and continue to append from the space.
-        char win11[12] = "Windows 11";
-        memcpy(system->OS_ProductName, win11, 12);
-        memcpy(system->OS_ProductName + 11, productName + 11, OS_PRODUCT_NAME_SIZE - 11);
+        //Copy the 11 bytes and the last one 10th index is '\0'.
+        //The 10th index in the productName array is the space after major windows number and we overwrite previous null terminator and continue to append from the space.
+        char win11[11] = "Windows 11";
+        strncpy(system->OS_ProductName, win11, 11);
+        strncpy(system->OS_ProductName + 10, productName + 10, OS_PRODUCT_NAME_SIZE - 10);
     }
     else{
-        memcpy(system->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
+        strncpy(system->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
     }
 }
 
 void setOSVersion(sysInfo* system, char* versionNumber){
-    memcpy(system->OS_version, versionNumber, OS_VERSION_SIZE);
+    strncpy(system->OS_version, versionNumber, OS_VERSION_SIZE);
 }
 
 void setOSBuildNumber(sysInfo* system, char* buildNumber){
-    memcpy(system->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
+    strncpy(system->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
 }
 
 void getOS(sysInfo* system){

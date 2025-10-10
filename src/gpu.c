@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
 #include <dxgi.h>
-#include <string.h>
 #include "../headers/sysFunctions.h"
 #include "../headers/sysInfo.h"
 

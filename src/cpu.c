@@ -21,6 +21,25 @@ void getCPU(sysInfo* system){
 
     CPU_brand_string[48] = '\0';
     memcpy(system->CPU, CPU_brand_string, 49);
+
+    // CPU Architecture
+    SYSTEM_INFO sysInfo;
+    GetNativeSystemInfo(&sysInfo);
+
+    switch (sysInfo.wProcessorArchitecture) {
+    case PROCESSOR_ARCHITECTURE_AMD64:
+        strncpy(system->CPU_Architecture, "x86_64", 8);
+        break;
+    case PROCESSOR_ARCHITECTURE_ARM64:
+        strncpy(system->CPU_Architecture, "ARM64", 8);
+        break;
+    case PROCESSOR_ARCHITECTURE_INTEL:
+        strncpy(system->CPU_Architecture, "x86", 8);
+        break;
+    default:
+        strncpy(system->CPU_Architecture, "Unknown", 8);
+        break;
+    }
 }
 
 /*
