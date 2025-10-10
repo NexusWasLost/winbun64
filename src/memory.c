@@ -15,5 +15,6 @@ void getMemory(sysInfo* system){
     system->totalMemory = mem.ullTotalPhys / (1024 * 1024);
     system->availableMemory = mem.ullAvailPhys / (1024 * 1024);
     system->memoryLoad = mem.dwMemoryLoad;
+    system->totalUsedMemory = system->totalMemory - system->availableMemory;
 
 }

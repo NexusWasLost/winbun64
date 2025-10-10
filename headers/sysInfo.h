@@ -17,6 +17,7 @@ typedef struct System_Information{
     //Memory Information (RAM)
     unsigned long long totalMemory;
     unsigned long long availableMemory;
+    unsigned long long totalUsedMemory;
     unsigned long long memoryLoad;
 
     //CPU information

@@ -7,12 +7,12 @@ int main(){
     sysInfo system;
     getMemory(&system);
 
-    printf("Total Memory: %llu MB\n", system.totalMemory);
+    printf("Memory: %llu MB / %llu MB (%llu %%)\n", system.totalUsedMemory, system.totalMemory, system.memoryLoad);
     printf("Available Memory: %llu MB\n", system.availableMemory);
-    printf("Memory Load: %llu %%\n", system.memoryLoad);
+    // printf("Total Memory: %llu MB\n", system.totalMemory);
+    // printf("Memory Load: %llu %%\n", system.memoryLoad);
 
     getGPU(&system);
-
     if(system.GPU1[0] != '\0'){
         wprintf(L"GPU1: %ls @ %llu MB\n", system.GPU1, system.totalVRAM1);
     }
