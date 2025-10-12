@@ -43,7 +43,7 @@ void displayALLData(sysInfo* system){
 
     // ===== Resolution =====
     printf("Resolution: ");
-    for(unsigned x = 0; x < system->displayCount; x++){
+    for(int x = 0; x < system->displayCount; x++){
         //check for last display and dont end with a comma
         if(x == system->displayCount - 1){
             printf("%dx%d @ %dHz\n",
@@ -63,12 +63,16 @@ void displayALLData(sysInfo* system){
     printf("CPU: %s\n", system->CPU);
 
     // ===== GPU =====
-    if(system->GPU1[0] != '\0'){
-        wprintf(L"GPU1: %ls @ %llu MB\n", system->GPU1, system->totalVRAM1);
+    for(int x = 0; x < system->gpuCount; x++){
+        wprintf(L"GPU%d: %ls @ %llu MB\n", x + 1, system->gpu[x].GPU_Name, system->gpu[x].totalVRAM);
     }
-    if(system->GPU2[0] != '\0'){
-        wprintf(L"GPU2: %ls @ %llu MB\n", system->GPU2, system->totalVRAM2);
-    }
+
+    // if(system->GPU1[0] != '\0'){
+    //     wprintf(L"GPU1: %ls @ %llu MB\n", system->GPU1, system->totalVRAM1);
+    // }
+    // if(system->GPU2[0] != '\0'){
+    //     wprintf(L"GPU2: %ls @ %llu MB\n", system->GPU2, system->totalVRAM2);
+    // }
 
     // ===== Locale =====
     wprintf(L"Locale: %ls\n", system->locale);

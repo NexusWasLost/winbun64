@@ -4,6 +4,8 @@
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
 #define OS_VERSION_SIZE 8
+#define MAX_DISPLAY_COUNT 4
+#define MAX_GPU_COUNT 4
 
 typedef struct Display_Monitors{
 
@@ -11,13 +13,18 @@ typedef struct Display_Monitors{
     int height;
     int refreshRate;
 
-}display;
+} display;
+
+typedef struct Graphics_Adapter{
+
+    wchar_t GPU_Name[128];
+    unsigned long long totalVRAM;
+
+} GPU;
 
 typedef struct System_Information{
 
     char CPU[49];
-    wchar_t GPU1[128];
-    wchar_t GPU2[128];
     char OS_ProductName[OS_PRODUCT_NAME_SIZE];
     char OS_version[OS_VERSION_SIZE];
     char OS_buildNumber[OS_BUILD_NUMBER_SIZE];
@@ -30,11 +37,12 @@ typedef struct System_Information{
     unsigned long long availableMemory;
     unsigned long long totalUsedMemory;
     unsigned long long memoryLoad;
-    unsigned long long totalVRAM1;
-    unsigned long long totalVRAM2;
     unsigned long long uptime;
 
-    display monitors[4];
+    GPU gpu[MAX_GPU_COUNT];
+    int gpuCount;
+
+    display monitors[MAX_DISPLAY_COUNT];
     int displayCount;
 
 } sysInfo;
