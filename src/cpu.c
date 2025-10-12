@@ -2,10 +2,10 @@
 #include <windows.h>
 #include <cpuid.h>
 #include <string.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void getCPU(sysInfo* system){
+void getCPU(WINCORE* core){
     char CPU_brand_string[49];
 
     unsigned int eax, ebx, ecx, edx;
@@ -20,24 +20,24 @@ void getCPU(sysInfo* system){
     }
 
     CPU_brand_string[48] = '\0';
-    memcpy(system->CPU, CPU_brand_string, 49);
+    memcpy(core->CPU, CPU_brand_string, 49);
 
     // CPU Architecture
-    SYSTEM_INFO sysInfo;
-    GetNativeSystemInfo(&sysInfo);
+    SYSTEM_INFO CPU;
+    GetNativeSystemInfo(&CPU);
 
-    switch (sysInfo.wProcessorArchitecture) {
+    switch (CPU.wProcessorArchitecture) {
     case PROCESSOR_ARCHITECTURE_AMD64:
-        strncpy(system->CPU_Architecture, "x86_64", 8);
+        strncpy(core->CPU_Architecture, "x86_64", 8);
         break;
     case PROCESSOR_ARCHITECTURE_ARM64:
-        strncpy(system->CPU_Architecture, "ARM64", 8);
+        strncpy(core->CPU_Architecture, "ARM64", 8);
         break;
     case PROCESSOR_ARCHITECTURE_INTEL:
-        strncpy(system->CPU_Architecture, "x86", 8);
+        strncpy(core->CPU_Architecture, "x86", 8);
         break;
     default:
-        strncpy(system->CPU_Architecture, "Unknown", 8);
+        strncpy(core->CPU_Architecture, "Unknown", 8);
         break;
     }
 }
@@ -54,5 +54,5 @@ We use offset to fill these bytes into our brand string buffer.
 The offset denotes the start of filling for each call. First we start from 0 * 16 which is 0 so from index 0 we fill 4 bytes add + 4 and fill next 4 bytes, + 8 then + 12.
 Similarly for the second call we do 1 * 16 which is 16 so now the starting point is 16 and then we continue.
 Same with the third call we do 2 * 16 which is 32 so now the starting point is 32 and then we continue again till index 47 and 48 is '\0'.
-Then we use memcpy to copy the whole brandstring into our system struct.
+Then we use memcpy to copy the whole brandstring into our core struct.
 */

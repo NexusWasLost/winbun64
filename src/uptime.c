@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void getUptime(sysInfo* system){
+void getUptime(WINCORE* core){
 
     ULONGLONG uptime = GetTickCount64();
-    system->uptime = uptime;
+    core->uptime = uptime;
 
 }

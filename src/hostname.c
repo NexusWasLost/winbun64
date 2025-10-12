@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <windows.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void getHostName(sysInfo* system){
-    DWORD size = sizeof(system->host);
+void getHostName(WINCORE* core){
+    DWORD size = sizeof(core->host);
 
-    WINBOOL res = GetComputerNameA(system->host, &size);
+    WINBOOL res = GetComputerNameA(core->host, &size);
     if(!res){
         printf("Error Getting Host Name...");
         return;

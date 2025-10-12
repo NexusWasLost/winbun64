@@ -1,9 +1,9 @@
 #include <windows.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void getDisplay(sysInfo* system){
-    system->displayCount = 0;
+void getDisplay(WINCORE* core){
+    core->displayCount = 0;
     DISPLAY_DEVICE disp = { 0 };
 
     disp.cb = sizeof(disp);
@@ -17,11 +17,11 @@ void getDisplay(sysInfo* system){
         DEVMODE devmode = { 0 };
         devmode.dmSize = sizeof(DEVMODE);
         if (EnumDisplaySettings(disp.DeviceName, ENUM_CURRENT_SETTINGS, &devmode)){
-            //access each elements of the system->monitor for the system->displayCount index;
-            system->monitors[system->displayCount].height = devmode.dmPelsHeight;
-            system->monitors[system->displayCount].width = devmode.dmPelsWidth;
-            system->monitors[system->displayCount].refreshRate = devmode.dmDisplayFrequency;
-            system->displayCount++;
+            //access each elements of the core->monitor for the core->displayCount index;
+            core->monitors[core->displayCount].height = devmode.dmPelsHeight;
+            core->monitors[core->displayCount].width = devmode.dmPelsWidth;
+            core->monitors[core->displayCount].refreshRate = devmode.dmDisplayFrequency;
+            core->displayCount++;
         }
     }
 }

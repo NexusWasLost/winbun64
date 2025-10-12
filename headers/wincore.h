@@ -1,5 +1,5 @@
 #pragma once
-#ifndef SYSINFO_H
+#ifndef WINCORE_H
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
@@ -22,7 +22,7 @@ typedef struct Graphics_Adapter{
 
 } GPU;
 
-typedef struct System_Information{
+typedef struct Windows_System_Information{
 
     char CPU[49];
     char OS_ProductName[OS_PRODUCT_NAME_SIZE];
@@ -45,6 +45,6 @@ typedef struct System_Information{
     display monitors[MAX_DISPLAY_COUNT];
     int displayCount;
 
-} sysInfo;
+} WINCORE;
 
 #endif

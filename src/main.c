@@ -1,81 +1,81 @@
 #include <stdio.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void displayALLData(sysInfo* system);
+void displayALLData(WINCORE* core);
 
 int main(){
 
-    sysInfo system;
+    WINCORE core;
 
-    getMemory(&system);
-    getCPU(&system);
-    getGPU(&system);
-    getOS(&system);
-    getDisplay(&system);
-    getCurrentUsername(&system);
-    getHostName(&system);
-    getUptime(&system);
-    getLocale(&system);
+    getMemory(&core);
+    getCPU(&core);
+    getGPU(&core);
+    getOS(&core);
+    getDisplay(&core);
+    getCurrentUsername(&core);
+    getHostName(&core);
+    getUptime(&core);
+    getLocale(&core);
 
-    displayALLData(&system);
+    displayALLData(&core);
     return 0;
 }
 
-void displayALLData(sysInfo* system){
+void displayALLData(WINCORE* core){
 
     // ===== HOST =====
-    printf("===== %s =====\n", system->host);
+    printf("===== %s =====\n", core->host);
 
     // ===== OS =====
-    printf("OS: %s %s (build %s)\n", system->OS_ProductName, system->OS_version, system->OS_buildNumber);
+    printf("OS: %s %s (build %s)\n", core->OS_ProductName, core->OS_version, core->OS_buildNumber);
 
     // ===== Username =====
-    printf("User: %s\n", system->currentUserName);
+    printf("User: %s\n", core->currentUserName);
 
     // ===== Uptime =====
-    double minutes = (system->uptime / 1000) / 60;
+    double minutes = (core->uptime / 1000) / 60;
     printf("Uptime: %d hours %d minutes\n", (int)(minutes / 60), (int)minutes % 60);
 
     // ===== Memory (RAM) =====
-    printf("Memory Used: %llu MB / %llu MB (%llu %%)\n", system->totalUsedMemory, system->totalMemory, system->memoryLoad);
-    printf("Available Memory: %llu MB\n", system->availableMemory);
+    printf("Memory Used: %llu MB / %llu MB (%llu %%)\n", core->totalUsedMemory, core->totalMemory, core->memoryLoad);
+    printf("Available Memory: %llu MB\n", core->availableMemory);
 
     // ===== Resolution =====
     printf("Resolution: ");
-    for(int x = 0; x < system->displayCount; x++){
+    for(int x = 0; x < core->displayCount; x++){
         //check for last display and dont end with a comma
-        if(x == system->displayCount - 1){
+        if(x == core->displayCount - 1){
             printf("%dx%d @ %dHz\n",
-            system->monitors[x].width,
-            system->monitors[x].height,
-            system->monitors[x].refreshRate);
+            core->monitors[x].width,
+            core->monitors[x].height,
+            core->monitors[x].refreshRate);
             break;
         }
 
         printf("%dx%d @ %dHz, ",
-            system->monitors[x].width,
-            system->monitors[x].height,
-            system->monitors[x].refreshRate);
+            core->monitors[x].width,
+            core->monitors[x].height,
+            core->monitors[x].refreshRate);
     }
 
     // ===== CPU =====
-    printf("CPU: %s\n", system->CPU);
+    printf("CPU: %s\n", core->CPU);
 
     // ===== GPU =====
-    for(int x = 0; x < system->gpuCount; x++){
-        wprintf(L"GPU%d: %ls @ %llu MB\n", x + 1, system->gpu[x].GPU_Name, system->gpu[x].totalVRAM);
+    for(int x = 0; x < core->gpuCount; x++){
+        wprintf(L"GPU%d: %ls @ %llu MB\n", x + 1, core->gpu[x].GPU_Name, core->gpu[x].totalVRAM);
     }
 
-    // if(system->GPU1[0] != '\0'){
-    //     wprintf(L"GPU1: %ls @ %llu MB\n", system->GPU1, system->totalVRAM1);
+    // if(core->GPU1[0] != '\0'){
+    //     wprintf(L"GPU1: %ls @ %llu MB\n", core->GPU1, core->totalVRAM1);
     // }
-    // if(system->GPU2[0] != '\0'){
-    //     wprintf(L"GPU2: %ls @ %llu MB\n", system->GPU2, system->totalVRAM2);
+    // if(core->GPU2[0] != '\0'){
+    //     wprintf(L"GPU2: %ls @ %llu MB\n", core->GPU2, core->totalVRAM2);
     // }
 
     // ===== Locale =====
-    wprintf(L"Locale: %ls\n", system->locale);
+    wprintf(L"Locale: %ls\n", core->locale);
 
     return;
 }

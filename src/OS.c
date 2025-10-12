@@ -1,32 +1,32 @@
 #include <stdio.h>
 #include <windows.h>
 #include <string.h>
-#include "../headers/sysInfo.h"
-#include "../headers/sysFunctions.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void setOSProductName(int majorBuildNumber, sysInfo* system, char* productName){
+void setOSProductName(int majorBuildNumber, WINCORE* core, char* productName){
     if(majorBuildNumber >= 22000){
         //The string "Windows 11" is total 10 chars + 1 char ('\0') and we store it in an array.
         //Copy the 11 bytes and the last one 10th index is '\0'.
         //The 10th index in the productName array is the space after major windows number and we overwrite previous null terminator and continue to append from the space.
         char win11[11] = "Windows 11";
-        strncpy(system->OS_ProductName, win11, 11);
-        strncpy(system->OS_ProductName + 10, productName + 10, OS_PRODUCT_NAME_SIZE - 10);
+        strncpy(core->OS_ProductName, win11, 11);
+        strncpy(core->OS_ProductName + 10, productName + 10, OS_PRODUCT_NAME_SIZE - 10);
     }
     else{
-        strncpy(system->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
+        strncpy(core->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
     }
 }
 
-void setOSVersion(sysInfo* system, char* versionNumber){
-    strncpy(system->OS_version, versionNumber, OS_VERSION_SIZE);
+void setOSVersion(WINCORE* core, char* versionNumber){
+    strncpy(core->OS_version, versionNumber, OS_VERSION_SIZE);
 }
 
-void setOSBuildNumber(sysInfo* system, char* buildNumber){
-    strncpy(system->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
+void setOSBuildNumber(WINCORE* core, char* buildNumber){
+    strncpy(core->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
 }
 
-void getOS(sysInfo* system){
+void getOS(WINCORE* core){
     HKEY hkey;
     char productName[64];
     char buildNumber[32];
@@ -113,13 +113,13 @@ void getOS(sysInfo* system){
 
     //check major build for windows 11
     int major = atoi(buildNumber);
-    setOSProductName(major, system, productName);
-    setOSVersion(system, versionNumber);
-    setOSBuildNumber(system, buildNumber);
+    setOSProductName(major, core, productName);
+    setOSVersion(core, versionNumber);
+    setOSBuildNumber(core, buildNumber);
 
-    system->OS_ProductName[63] = '\0';
-    system->OS_buildNumber[31] = '\0';
-    system->OS_version[7] = '\0';
+    core->OS_ProductName[63] = '\0';
+    core->OS_buildNumber[31] = '\0';
+    core->OS_version[7] = '\0';
 
     RegCloseKey(hkey);
 }

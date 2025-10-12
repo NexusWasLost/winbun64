@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <windows.h>
-#include "../headers/sysFunctions.h"
-#include "../headers/sysInfo.h"
+#include "../headers/wincore.h"
+#include "../headers/wincore_functions.h"
 
-void getMemory(sysInfo* system){
+void getMemory(WINCORE* core){
     MEMORYSTATUSEX mem;
     mem.dwLength = sizeof(mem);
 
@@ -12,9 +12,9 @@ void getMemory(sysInfo* system){
         return;
     }
 
-    system->totalMemory = mem.ullTotalPhys / (1024 * 1024);
-    system->availableMemory = mem.ullAvailPhys / (1024 * 1024);
-    system->memoryLoad = mem.dwMemoryLoad;
-    system->totalUsedMemory = system->totalMemory - system->availableMemory;
+    core->totalMemory = mem.ullTotalPhys / (1024 * 1024);
+    core->availableMemory = mem.ullAvailPhys / (1024 * 1024);
+    core->memoryLoad = mem.dwMemoryLoad;
+    core->totalUsedMemory = core->totalMemory - core->availableMemory;
 
 }
