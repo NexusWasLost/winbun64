@@ -1,4 +1,5 @@
 .vscode
 *.exe
 *.o
-object Files
+obj
+lib_wincore

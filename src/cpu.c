@@ -2,8 +2,8 @@
 #include <windows.h>
 #include <cpuid.h>
 #include <string.h>
-#include "../headers/wincore.h"
-#include "../headers/wincore_functions.h"
+#include "wincore.h"
+#include "wincore_functions.h"
 
 void getCPU(WINCORE* core){
     char CPU_brand_string[49];

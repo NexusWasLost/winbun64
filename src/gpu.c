@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <windows.h>
 #include <dxgi.h>
-#include "../headers/wincore.h"
-#include "../headers/wincore_functions.h"
+#include "wincore.h"
+#include "wincore_functions.h"
 
 void getGPU(WINCORE* core){
     IDXGIFactory1* factory = NULL;

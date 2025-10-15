@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include <windows.h>
-#include "../headers/wincore.h"
-#include "../headers/wincore_functions.h"
+#include "wincore.h"
+#include "wincore_functions.h"
 
 void getUptime(WINCORE* core){
 
