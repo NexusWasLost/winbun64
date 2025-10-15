@@ -1,11 +1,14 @@
 #pragma once
 #ifndef WINCORE_H
+#define WINCORE_H
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
 #define OS_VERSION_SIZE 8
 #define MAX_DISPLAY_COUNT 4
 #define MAX_GPU_COUNT 4
+
+#include <wchar.h>
 
 typedef struct Display_Monitors{
 
@@ -35,7 +38,7 @@ typedef struct Windows_System_Information{
 
     unsigned long long totalMemory;
     unsigned long long availableMemory;
-    unsigned long long totalUsedMemory;
+    unsigned long long usedMemory;
     unsigned long long memoryLoad;
     unsigned long long uptime;
 
