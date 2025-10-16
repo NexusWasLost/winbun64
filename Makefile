@@ -15,5 +15,5 @@ $(OBJ_FOLDER):
 $(OBJ_FOLDER)/%.o: ./src/%.c | $(OBJ_FOLDER)
 	gcc -c -I"./headers" $< -o $@
 
-clean-obj:
+clean:
 	powershell -Command "Remove-Item -Recurse -Force ./obj/*"
