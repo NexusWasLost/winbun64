@@ -15,6 +15,6 @@ void getMemory(WINCORE* core){
     core->totalMemory = mem.ullTotalPhys / (1024 * 1024);
     core->availableMemory = mem.ullAvailPhys / (1024 * 1024);
     core->memoryLoad = mem.dwMemoryLoad;
-    core->totalUsedMemory = core->totalMemory - core->availableMemory;
+    core->usedMemory = core->totalMemory - core->availableMemory;
 
 }
