@@ -16,7 +16,7 @@ typedef struct Display_Monitors{
     int height;
     int refreshRate;
 
-} display;
+} Display;
 
 typedef struct Graphics_Adapter{
 
@@ -45,7 +45,7 @@ typedef struct Windows_System_Information{
     GPU gpu[MAX_GPU_COUNT];
     int gpuCount;
 
-    display monitors[MAX_DISPLAY_COUNT];
+    Display monitors[MAX_DISPLAY_COUNT];
     int displayCount;
 
 } WINCORE;
