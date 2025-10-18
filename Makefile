@@ -5,6 +5,7 @@ SourceFiles = ./obj/cpu.o ./obj/gpu.o ./obj/memory.o ./obj/OS.o ./obj/locale.o .
 OBJ_FOLDER = obj
 
 all: $(SourceFiles)
+	ar rcs ./winbun64/lib/libwinbun.a ./obj/*.o
 
 #create folder to store .o files
 $(OBJ_FOLDER):
@@ -17,3 +18,6 @@ $(OBJ_FOLDER)/%.o: ./src/%.c | $(OBJ_FOLDER)
 
 clean:
 	powershell -Command "Remove-Item -Recurse -Force ./obj/*"
+
+clean-bun:
+	powershell -Command "Remove-Item -Force ./winbun64/lib/*.a"

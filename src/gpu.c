@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <windows.h>
 #include <dxgi.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getGPU(WINCORE* core){
+void getGPU(WINBUN* bun){
     IDXGIFactory1* factory = NULL;
 
     HRESULT result = CreateDXGIFactory1(&IID_IDXGIFactory1, (void**)&factory);
@@ -16,10 +16,10 @@ void getGPU(WINCORE* core){
     //create adapter pointer
     IDXGIAdapter1* adapter = NULL;
     UINT index = 0;
-    core->gpuCount = 0;
+    bun->gpuCount = 0;
 
     while(TRUE){
-        if(core->gpuCount >= MAX_GPU_COUNT) return;
+        if(bun->gpuCount >= MAX_GPU_COUNT) return;
 
         HRESULT hr = factory->lpVtbl->EnumAdapters1(factory, index, &adapter);
 
@@ -45,15 +45,15 @@ void getGPU(WINCORE* core){
 
         //looks a bit too cursed, so here is the explanation for the below line.
         /*
-        core->gpu is an array to GPU struct and we use core->gpuCount as index.
-        core->gpuCount is an integer.
+        bun->gpu is an array to GPU struct and we use bun->gpuCount as index.
+        bun->gpuCount is an integer.
         Now gpu is a struct containing a wchar_t array called GPU_Name therefore passing it
         to a function will result in a decay to a pointer and thats what memcpy expects.
         */
-        memcpy(core->gpu[core->gpuCount].GPU_Name, desc.Description, 128);
-        core->gpu[core->gpuCount].GPU_Name[127] = L'\0';
-        core->gpu[core->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));
-        ++core->gpuCount;
+        memcpy(bun->gpu[bun->gpuCount].GPU_Name, desc.Description, 128);
+        bun->gpu[bun->gpuCount].GPU_Name[127] = L'\0';
+        bun->gpu[bun->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));
+        ++bun->gpuCount;
 
         adapter->lpVtbl->Release(adapter);
         adapter = NULL;

@@ -1,8 +1,8 @@
-# Wincore
+# WinBun64
 
-Wincore is a C library for fetching system information on a Windows System.
+WinBun64 is a C library for fetching system information on a Windows System.
 
-Wincore is written in C but is compatible with both C and C++.
+WinBun64 is written in C but is compatible with both C and C++.
 
 ## 🔺 Features
 
@@ -31,12 +31,12 @@ Wincore is written in C but is compatible with both C and C++.
 
 ## 📦 Downloading the Library
 
-Wincore is shipped as a static library (`.a`) alongside headers files in an "include" folder.
+WinBun64 is shipped as a static library (`.a`) alongside headers files in an "include" folder.
 
-- `include/` - contains `wincore.h` and `wincore_functions.h`.
-- `lib/` - contains `libwincore.a` (the actual library).
+- `include/` - contains `WinBun64.h` and `WinBun64_functions.h`.
+- `lib/` - contains `libWinBun64.a` (the actual library).
 
-To get started, download the library from [releases](https://github.com/nexus949/wincore/releases) or click [here](https://github.com/nexus949/wincore/releases/download/v1.0/lib_wincore.zip) to start download.
+To get started, download the library from [releases](https://github.com/nexus949/WinBun64/releases) or click [here](https://github.com/nexus949/WinBun64/releases/download/v1.0/lib_WinBun64.zip) to start download.
 
 ***IMPORTANT:*** The path to both the headers and the library are required while linking as the compiler does not know where the include headers and the actual library exists and needs to be specified at the time of linking.
 
@@ -44,37 +44,37 @@ To get started, download the library from [releases](https://github.com/nexus949
 
 ```c
 #include <stdio.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
 int main(){
-	WINCORE core; //define a WINCORE variable
+	WINBUN bun; //define a WINBUN variable
 
-	getCPU(&core); //call needed function
-	getMemory(&core);
+	getCPU(&bun); //call needed function
+	getMemory(&bun);
 
 	//print the info
-	printf("CPU: %s\n", core.CPU);
-	printf("RAM: %llu MB / %llu MB\n", core.usedMemory, core.totalMemory);
+	printf("CPU: %s\n", bun.CPU);
+	printf("RAM: %llu MB / %llu MB\n", bun.usedMemory, bun.totalMemory);
 
 	return 0;
 }
 ```
 
-Each function fills the variable named `core` with respective info.
+Each function fills the variable named `bun` with respective info.
 
 Assuming the code file is called `main.c`, Compile using `gcc`:
 
 ```shell
-gcc main.c -I"path-to-include-headers" -L"path-to-library" -l:libwincore.a -ldxgi -ldxguid -lole32 -o main.exe
+gcc main.c -I"path-to-include-headers" -L"path-to-library" -l:libwinbun.a -ldxgi -ldxguid -lole32 -o main.exe
 ```
 
-**IMPORTANT:** Wincore depends on Windows provided Libraries such as `dxgi`, `dxguid` and `ole32` as it uses `DXGI` for GPU information therefore these needs to be linked while producing an `exe`.
+**IMPORTANT:** WinBun64 depends on Windows provided Libraries such as `dxgi`, `dxguid` and `ole32` as it uses `DXGI` for GPU information therefore these needs to be linked while producing an `exe`.
 
 Additional info:
-	1. The `-I` flag tells the compiler to check for include headers in the specified directory. The path to `wincore.h` and `wincore_functions.h` must be provided here.
-	2. The `-L` flag tells the compiler to check for the library (`.a` file or `.lib` file) in the specified directory. The path to `libwincore.a` must be provided here.
-	3. The `-l:` is used to specify linking hence tells the compiler to link against the library `libwincore.a`.
+	1. The `-I` flag tells the compiler to check for include headers in the specified directory. The path to `winbun.h` and `winbun_functions.h` must be provided here.
+	2. The `-L` flag tells the compiler to check for the library (`.a` file or `.lib` file) in the specified directory. The path to `libwinbun.a` must be provided here.
+	3. The `-l:` is used to specify linking hence tells the compiler to link against the library `libwinbun.a`.
 
 
 ## 🔨 Building from Source
@@ -88,25 +88,19 @@ The library can be built from source if needed.
 1. Clone the repository
 
 ```shell
-git clone https://github.com/nexus949/wincore.git
+git clone https://github.com/nexus949/winbun64.git
 ```
 
 2. Navigate into the directory
 
 ```shell
-cd wincore
+cd winbun64
 ```
 
-3. Build `.o` files using make
+3. Make `.o` files and archieve using make
 
 ```shell
 make
-```
-
-4. Archive using `ar` to make a static library
-
-```shell
-ar rcs ./lib_wincore/lib/libwincore.a ./obj/*.o
 ```
 
 This will output a static library and can be used alongside the headers anywhere.
@@ -121,7 +115,7 @@ In `cpu.c`, replace GCC specific - `<cpuid.h>` and `__get_cpuid()` with MSVC equ
 ...
 #include <intrin.h> //include intrin.h instead of cpuid.h
 ...
-void getCPU(WINCORE* core){
+void getCPU(WINBUN* bun){
 	...
 	int cpuBrandString[4];
 	for(int x = 0; x < 3; x++){
@@ -159,7 +153,7 @@ Then compile the source code files (`.c`) files into `.o` files and build a stat
 
 ## ❔ How does it work ?
 
-Wincore uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
+WinBun64 uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
 
 A very detailed explanation of each component is explained [here]().
 
@@ -188,7 +182,7 @@ Really loved making this project equally frustrating and fun.
 
 - Other References - [Microsoft Docs](https://learn.microsoft.com/en-us/windows/win32/api/) (Yes I used it a bit), [Stack Overflow](https://stackoverflow.com/questions).
 
-- Wincore used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
+- WinBun64 used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
 
 - Thanks to [Arpan](https://github.com/arpank01) for running winfetch (A `.exe` that uses this library), helped me find bugs and issues.
 

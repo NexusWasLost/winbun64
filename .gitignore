@@ -1,5 +1,6 @@
 .vscode
 *.exe
 *.o
+*.zip
 obj
-lib_wincore
+winbun64

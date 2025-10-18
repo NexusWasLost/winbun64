@@ -2,10 +2,10 @@
 #include <windows.h>
 #include <cpuid.h>
 #include <string.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getCPU(WINCORE* core){
+void getCPU(WINBUN* bun){
     char CPU_brand_string[49];
 
     unsigned int eax, ebx, ecx, edx;
@@ -20,7 +20,7 @@ void getCPU(WINCORE* core){
     }
 
     CPU_brand_string[48] = '\0';
-    memcpy(core->CPU, CPU_brand_string, 49);
+    memcpy(bun->CPU, CPU_brand_string, 49);
 
     // CPU Architecture
     SYSTEM_INFO CPU;
@@ -28,16 +28,16 @@ void getCPU(WINCORE* core){
 
     switch (CPU.wProcessorArchitecture) {
     case PROCESSOR_ARCHITECTURE_AMD64:
-        strncpy(core->CPU_Architecture, "x86_64", 8);
+        strncpy(bun->CPU_Architecture, "x86_64", 8);
         break;
     case PROCESSOR_ARCHITECTURE_ARM64:
-        strncpy(core->CPU_Architecture, "ARM64", 8);
+        strncpy(bun->CPU_Architecture, "ARM64", 8);
         break;
     case PROCESSOR_ARCHITECTURE_INTEL:
-        strncpy(core->CPU_Architecture, "x86", 8);
+        strncpy(bun->CPU_Architecture, "x86", 8);
         break;
     default:
-        strncpy(core->CPU_Architecture, "Unknown", 8);
+        strncpy(bun->CPU_Architecture, "Unknown", 8);
         break;
     }
 }
@@ -54,5 +54,5 @@ We use offset to fill these bytes into our brand string buffer.
 The offset denotes the start of filling for each call. First we start from 0 * 16 which is 0 so from index 0 we fill 4 bytes add + 4 and fill next 4 bytes, + 8 then + 12.
 Similarly for the second call we do 1 * 16 which is 16 so now the starting point is 16 and then we continue.
 Same with the third call we do 2 * 16 which is 32 so now the starting point is 32 and then we continue again till index 47 and 48 is '\0'.
-Then we use memcpy to copy the whole brandstring into our core struct.
+Then we use memcpy to copy the whole brandstring into our bun struct.
 */

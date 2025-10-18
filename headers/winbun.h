@@ -48,6 +48,6 @@ typedef struct Windows_System_Information{
     Display monitors[MAX_DISPLAY_COUNT];
     int displayCount;
 
-} WINCORE;
+} WINBUN;
 
 #endif

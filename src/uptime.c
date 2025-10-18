@@ -1,10 +1,10 @@
 #include <windows.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getUptime(WINCORE* core){
+void getUptime(WINBUN* bun){
 
     ULONGLONG uptime = GetTickCount64();
-    core->uptime = uptime;
+    bun->uptime = uptime;
 
 }

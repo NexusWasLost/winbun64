@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getLocale(WINCORE* core){
+void getLocale(WINBUN* bun){
 
-    int lc = GetUserDefaultLocaleName(core->locale, LOCALE_NAME_MAX_LENGTH);
+    int lc = GetUserDefaultLocaleName(bun->locale, LOCALE_NAME_MAX_LENGTH);
     if(!lc){
         printf("Error Getting Locale...");
         return;

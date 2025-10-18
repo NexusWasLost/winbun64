@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getCurrentUsername(WINCORE* core){
-    DWORD size = sizeof(core->currentUserName);
-    WINBOOL uName = GetUserNameA(core->currentUserName, &size);
+void getCurrentUsername(WINBUN* bun){
+    DWORD size = sizeof(bun->currentUserName);
+    WINBOOL uName = GetUserNameA(bun->currentUserName, &size);
     if(!uName){
         printf("Error Getting Username...");
         return;

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <windows.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getHostName(WINCORE* core){
-    DWORD size = sizeof(core->host);
+void getHostName(WINBUN* bun){
+    DWORD size = sizeof(bun->host);
 
-    WINBOOL res = GetComputerNameA(core->host, &size);
+    WINBOOL res = GetComputerNameA(bun->host, &size);
     if(!res){
         printf("Error Getting Host Name...");
         return;

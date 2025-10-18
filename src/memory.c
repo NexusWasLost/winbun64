@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <windows.h>
-#include "wincore.h"
-#include "wincore_functions.h"
+#include "winbun.h"
+#include "winbun_functions.h"
 
-void getMemory(WINCORE* core){
+void getMemory(WINBUN* bun){
     MEMORYSTATUSEX mem;
     mem.dwLength = sizeof(mem);
 
@@ -12,9 +12,9 @@ void getMemory(WINCORE* core){
         return;
     }
 
-    core->totalMemory = mem.ullTotalPhys / (1024 * 1024);
-    core->availableMemory = mem.ullAvailPhys / (1024 * 1024);
-    core->memoryLoad = mem.dwMemoryLoad;
-    core->usedMemory = core->totalMemory - core->availableMemory;
+    bun->totalMemory = mem.ullTotalPhys / (1024 * 1024);
+    bun->availableMemory = mem.ullAvailPhys / (1024 * 1024);
+    bun->memoryLoad = mem.dwMemoryLoad;
+    bun->usedMemory = bun->totalMemory - bun->availableMemory;
 
 }
