@@ -33,8 +33,8 @@ WinBun64 is written in C but is compatible with both C and C++.
 
 WinBun64 is shipped as a static library (`.a`) alongside headers files in an "include" folder.
 
-- `include/` - contains `WinBun64.h` and `WinBun64_functions.h`.
-- `lib/` - contains `libWinBun64.a` (the actual library).
+- `include/` - contains `winbun.h` and `winbun_functions.h`.
+- `lib/` - contains `libwinbun.a` (the actual library).
 
 To get started, download the library from [releases](https://github.com/nexus949/WinBun64/releases) or click [here](https://github.com/nexus949/WinBun64/releases/download/v1.0/lib_WinBun64.zip) to start download.
 
