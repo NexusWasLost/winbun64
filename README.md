@@ -36,7 +36,7 @@ WinBun64 is shipped as a static library (`.a`) alongside headers files in an "in
 - `include/` - contains `winbun.h` and `winbun_functions.h`.
 - `lib/` - contains `libwinbun.a` (the actual library).
 
-To get started, download the library from [releases](https://github.com/nexus949/WinBun64/releases) or click [here](https://github.com/nexus949/WinBun64/releases/download/v1.0/lib_WinBun64.zip) to start download.
+To get started, download the library from [releases](https://github.com/nexus949/winbun64/releases) or click [here](https://github.com/nexus949/winbun64/releases/download/v1.0/winbun64.zip) to start download.
 
 ***IMPORTANT:*** The path to both the headers and the library are required while linking as the compiler does not know where the include headers and the actual library exists and needs to be specified at the time of linking.
 
