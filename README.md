@@ -72,21 +72,22 @@ gcc main.c -I"path-to-include-headers" -L"path-to-library" -l:libwinbun.a -ldxgi
 **IMPORTANT:** WinBun64 depends on Windows provided Libraries such as `dxgi`, `dxguid` and `ole32` as it uses `DXGI` for GPU information therefore these needs to be linked while producing an `exe`.
 
 Additional info:
-	1. The `-I` flag tells the compiler to check for include headers in the specified directory. The path to `winbun.h` and `winbun_functions.h` must be provided here.
+  1. The `-I` flag tells the compiler to check for include headers in the specified directory. The path to `winbun.h` and `winbun_functions.h` must be provided here.
 
-	2. The `-L` flag tells the compiler to check for the library (`.a` file or `.lib` file) in the specified directory. The path to `libwinbun.a` must be provided here.
+  2. The `-L` flag tells the compiler to check for the library (`.a` file or `.lib` file) in the specified directory. The path to `libwinbun.a` must be provided here.
 
-	3. The `-l:` is used to specify linking hence tells the compiler to link against the library `libwinbun.a`.
+  3. The `-l:` is used to specify linking hence tells the compiler to link against the library `libwinbun.a`.
 
 
 ## 🔨 Building from Source
 
 The library can be built from source if needed.
 
-*Pre-requisites* -
-	1. C compiler: GCC preferred, can even use Clang.
+*Pre-requisites* :
+  1. C compiler: GCC preferred, can even use Clang.
 
-	2. make for makefiles.
+  2. make for makefiles.
+  &nbsp;
 
 1. Clone the repository
 
