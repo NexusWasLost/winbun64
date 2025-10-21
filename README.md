@@ -83,11 +83,7 @@ Additional info:
 
 The library can be built from source if needed.
 
-*Pre-requisites* :
-  1. C compiler: GCC preferred, can even use Clang.
-
-  2. make for makefiles.
-  &nbsp;
+*Pre-requisites* : A C Compiler (GCC preferred, can also use Clang), make for makefiles.
 
 1. Clone the repository
 
