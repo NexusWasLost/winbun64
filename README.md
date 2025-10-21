@@ -73,7 +73,9 @@ gcc main.c -I"path-to-include-headers" -L"path-to-library" -l:libwinbun.a -ldxgi
 
 Additional info:
 	1. The `-I` flag tells the compiler to check for include headers in the specified directory. The path to `winbun.h` and `winbun_functions.h` must be provided here.
+
 	2. The `-L` flag tells the compiler to check for the library (`.a` file or `.lib` file) in the specified directory. The path to `libwinbun.a` must be provided here.
+
 	3. The `-l:` is used to specify linking hence tells the compiler to link against the library `libwinbun.a`.
 
 
@@ -83,6 +85,7 @@ The library can be built from source if needed.
 
 *Pre-requisites* -
 	1. C compiler: GCC preferred, can even use Clang.
+
 	2. make for makefiles.
 
 1. Clone the repository
@@ -167,7 +170,7 @@ I refrained from explaining much as this documentation will get significantly la
 
 Initially I thought of making it as a neofetch/fastfetch equivalent for windows but after seeing how ridiculously hard it is to get simple system information in Windows I thought of turning this into a library that will help me or others in the future to get system info on a stubborn OS such as Windows.
 
-I made it as I a cool and practical project that can help me (or others) to easily get system info on Windows system without going through the pain I did.
+I made it as a cool and practical project that can help me (or others) to easily get system info on Windows system without going through the pain I did.
 
 Windows itself was not made for transparency and hence is not at all dev friendly by any means. WinAPI or the Windows SDK in general is the worst piece of tech I have ever worked with. But...
 this project taught me a lot and I mean a lot, this was the first time using low level APIs like `DXGI` and WinAPI and I also learned makefiles for building this project. Moreover, I learned about compiler flags such as `-I` and `-L`,  building a static library and shipping it with headers.
@@ -178,7 +181,7 @@ Really loved making this project equally frustrating and fun.
 
 ## ℹ Credits, Tools and Additional Info
 
-- I used [chatGPT]() for 99% of the time to learn about WinAPI, `DXGI`, Registry Query and the whole project. I preferred chatGPT over Microsoft Docs because it was in a more "understandable" language. With that said I didn't copy paste code I wrote what I understood.
+- I used [chatGPT](https://chatgpt.com/) for 99% of the time to learn about WinAPI, `DXGI`, Registry Query and the whole project. I preferred chatGPT over Microsoft Docs because it was in a more "understandable" language. With that said I didn't copy paste code I wrote what I understood.
 
 - Other References - [Microsoft Docs](https://learn.microsoft.com/en-us/windows/win32/api/) (Yes I used it a bit), [Stack Overflow](https://stackoverflow.com/questions).
 

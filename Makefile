@@ -7,6 +7,8 @@ OBJ_FOLDER = obj
 all: $(SourceFiles)
 	ar rcs ./winbun64/lib/libwinbun.a ./obj/*.o
 
+dot-o: $(SourceFiles)
+
 #create folder to store .o files
 $(OBJ_FOLDER):
 	mkdir $(OBJ_FOLDER)
