@@ -155,11 +155,29 @@ Then compile the source code files (`.c`) files into `.o` files and build a stat
 
 WinBun64 uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
 
-A very detailed explanation of each component is explained [here]().
+### 🔹 WinAPI
 
-For basic stuff such as hostname, uptime, etc. simple WinAPI calls worked but to get more core information, such as for CPU I have used `cpuid` alongside `SYSTEM_INFO` to get the CPU brand string and architecture. For OS info I have queried registry and used `DXGI` for Graphics Information like GPU brand string and VRAM.
+The Windows API (WinAPI) is the native API provided by Microsoft to interact directly with the Operating System.
 
-I refrained from explaining much as this documentation will get significantly large if I start to explain things in detail.
+WinBun64 uses a handful of lightweight WinAPI calls to fetch system level details like hostname, uptime, locale, etc. Functions such as `GetTickCount64()`(uptime), `GetUserNameA()`(username) and `GetComputerNameA()`(hostname) are directly used to extract these information.
+
+The `GetNativeSystemInfo()` function is used to extract CPU architecture.
+
+For getting display resolution and refresh rate of each available display `EnumDisplayDevices()` and `EnumDisplaySettings()` are used.
+
+### 🔹 Registry Query
+
+Windows registry is a heirarchical database storing config data for OS and installed softwares.
+
+WinBun64 queries specific registry keys to obtain necessary details like OS product name, version and build number.
+
+It uses `RegOpenKeyExA()` and `RegQueryValueExA()` to read these keys safely from `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion`, avoiding the complexity of manual registry access.
+
+### 🔹 DXGI (DirectX Graphics Infrastructure)
+
+DXGI is part of the DirectX family and provides API for Graphics and GPU related information.
+
+WinBun64 uses `DXGI` interfaces like `IDXGIFactory1()` and `IDXGIAdapter1()` to fetch GPU information such as GPU names, VRAM size and total number of adapters.
 
 ---
 
