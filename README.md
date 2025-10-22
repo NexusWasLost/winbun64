@@ -1,6 +1,6 @@
 # WinBun64
 
-WinBun64 is a C library for fetching system information on a Windows System.
+WinBun64 is a lightweight C library for fetching system information on Windows.
 
 WinBun64 is written in C but is compatible with both C and C++.
 
@@ -27,7 +27,7 @@ WinBun64 is written in C but is compatible with both C and C++.
 
 - *Windows Version Tested:* Windows 11 and Windows 10 (may work on 7, 8, 8.1, Vista, XP; Not tested).
 
-- *Compilers:* [GCC (MinGW)](https://nuwen.net/mingw.html) fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
+- *Compilers:* WinBun64 is compiled using [GCC (MinGW)](https://nuwen.net/mingw.html) so its fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
 
 ## 📦 Downloading the Library
 
@@ -210,7 +210,7 @@ Really loved making this project equally frustrating and fun.
 
 - WinBun64 used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
 
-- Thanks to [Arpan](https://github.com/arpank01) for running winfetch (A `.exe` that uses this library), helped me find bugs and issues.
+- Thanks to [Arpan](https://github.com/arpank01) for running a `.exe` that uses this library, helped me find bugs and issues.
 
 - I will try to keep this library updated as needed alongside the documentation.
 
