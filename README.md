@@ -27,7 +27,7 @@ WinBun64 is written in C but is compatible with both C and C++.
 
 - *Windows Version Tested:* Windows 11 and Windows 10 (may work on 7, 8, 8.1, Vista, XP; Not tested).
 
-- *compilers:* [GCC (MinGW)](https://nuwen.net/mingw.html) fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
+- *Compilers:* [GCC (MinGW)](https://nuwen.net/mingw.html) fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
 
 ## 📦 Downloading the Library
 
@@ -97,7 +97,7 @@ git clone https://github.com/NexusWasLost/winbun64.git
 cd winbun64
 ```
 
-3. Make `.o` files and archieve using make
+3. Make `.o` files and archive using make
 
 ```shell
 make
@@ -142,7 +142,7 @@ Then compile the source code files (`.c`) files into `.o` files and build a stat
 | `totalMemory`                           | `unsigned long long`              | `getMemory()`             | Total Physical Memory (in MB)            |
 | `availableMemory`                       | `unsigned long long`              | `getmemory()`             | Total Available Memory (in MB)           |
 | `usedMemory`                            | `unsigned long long`              | `getMemory()`             | Total Used Memory (in MB)                |
-| `memoryLoad`                            | `usigned long long`               | `getMemory()`             | Current Memory Load (Percentage)         |
+| `memoryLoad`                            | `unsigned long long`               | `getMemory()`             | Current Memory Load (Percentage)         |
 | `uptime`                                | `unsigned long long`              | `getUptime()`             | System Uptime (in seconds)               |
 | `gpu`                                   | `GPU` struct Array                | `getGPU()`                | List of GPUs Detected                    |
 | `GPU (GPU_Name, totalVRAM)`             | `wchar_t[]`, `unsigned long long` | *within `GPU` struct*     | GPU Name and total VRAM                  |
@@ -151,9 +151,11 @@ Then compile the source code files (`.c`) files into `.o` files and build a stat
 | `Display (width, height, refresh rate)` | `int, int, int`                   | *within `Display` struct* | Monitor Resolution and Refresh Rate      |
 | `displayCount`                          | `int`                             | `getDisplay()`            | Total Number of Active Displays Detected |
 
-## ❔ How does it work ?
+## ❔ How Does it Work ?
 
 WinBun64 uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
+WinBun64 functions accepts a single parameter which is a pointer to a `WINBUN` struct (`WINBUN*`).
+The variable of type `WINBUN` is passed by address, and each function populates it with corresponding system information.
 
 ### 🔹 WinAPI
 
@@ -167,7 +169,7 @@ For getting display resolution and refresh rate of each available display `EnumD
 
 ### 🔹 Registry Query
 
-Windows registry is a heirarchical database storing config data for OS and installed softwares.
+Windows registry is a hierarchical database storing config data for OS and installed software.
 
 WinBun64 queries specific registry keys to obtain necessary details like OS product name, version and build number.
 
@@ -178,6 +180,12 @@ It uses `RegOpenKeyExA()` and `RegQueryValueExA()` to read these keys safely fro
 DXGI is part of the DirectX family and provides API for Graphics and GPU related information.
 
 WinBun64 uses `DXGI` interfaces like `IDXGIFactory1()` and `IDXGIAdapter1()` to fetch GPU information such as GPU names, VRAM size and total number of adapters.
+
+### 🔹 CPUID
+
+`cpuid` is a processor instruction that returns detailed information about the CPU such as its Brand, features, etc.
+
+WinBun64 uses it to get the full CPU Brand String. Since it uses `cpuid` this limits WinBun64 to just x86 and x86_64 (AMD64) systems only.
 
 ---
 
