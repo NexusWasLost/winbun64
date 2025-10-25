@@ -52,10 +52,17 @@ int main(){
 
 	getCPU(&bun); //call needed function
 	getMemory(&bun);
+	getDisplay(&bun);
 
 	//print the info
 	printf("CPU: %s\n", bun.CPU);
 	printf("RAM: %llu MB / %llu MB\n", bun.usedMemory, bun.totalMemory);
+
+	//print all active displays.
+	printf("Resolution: ");
+	for(int x = 0; x < bun.displayCount; x++){
+        printf("%dx%d @ %dHz\n", bun.monitors[x].width, bun.monitors[x].height, bun.monitors[x].refreshRate);
+    }
 
 	return 0;
 }
