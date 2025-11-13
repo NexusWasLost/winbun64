@@ -202,7 +202,7 @@ Initially I thought of making it as a neofetch/fastfetch equivalent for windows 
 
 I made it as a cool and practical project that can help me (or others) to easily get system info on Windows system without going through the pain I did.
 
-Windows itself was not made for transparency and hence is not at all dev friendly by any means. WinAPI or the Windows SDK in general is the worst piece of tech I have ever worked with. But...
+Windows itself was not made for transparency and hence is not at all dev friendly by any means. WinAPI or the Windows SDK in general is quite challenging piece of tech I have ever worked with. But...
 this project taught me a lot and I mean a lot, this was the first time using low level APIs like `DXGI` and WinAPI and I also learned makefiles for building this project. Moreover, I learned about compiler flags such as `-I` and `-L`,  building a static library and shipping it with headers.
 
 Really loved making this project equally frustrating and fun.
