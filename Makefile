@@ -1,4 +1,4 @@
-# DXGI_FLAGS = -ldxgi -ldxguid -lole32 //needed to link while using wincore library
+# DXGI_FLAGS = -ldxgi -ldxguid -lole32 //needed to link while using winbun library
 
 SourceFiles = ./obj/cpu.o ./obj/gpu.o ./obj/memory.o ./obj/OS.o ./obj/locale.o ./obj/hostname.o ./obj/uptime.o ./obj/display.o ./obj/username.o
 
