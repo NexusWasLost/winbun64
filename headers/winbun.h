@@ -2,7 +2,7 @@
 #ifndef WINBUN_H
 #define WINBUN_H
 
-#define VERSION 1.2
+#define __WINBUN_VERSION "1.2"
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
