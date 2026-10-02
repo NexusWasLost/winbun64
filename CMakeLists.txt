@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 4.0)
+project(winbun64)
+
+add_library(winbun STATIC
+    ./src/cpu.c
+    ./src/display.c
+    ./src/gpu.c
+    ./src/hostname.c
+    ./src/locale.c
+    ./src/memory.c
+    ./src/OS.c
+    ./src/uptime.c
+    ./src/username.c
+)
+
+target_include_directories(winbun PRIVATE ./headers/)
+
+# DXGI_FLAGS: -ldxgi -ldxguid -lole32
+# These flags will be needed while building any executable using winbun64
