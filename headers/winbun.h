@@ -1,6 +1,8 @@
 #pragma once
-#ifndef WINCORE_H
-#define WINCORE_H
+#ifndef WINBUN_H
+#define WINBUN_H
+
+#define VERSION 1.1
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
