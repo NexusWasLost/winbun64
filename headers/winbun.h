@@ -2,13 +2,14 @@
 #ifndef WINBUN_H
 #define WINBUN_H
 
-#define __WINBUN_VERSION "1.3"
+#define __WINBUN_VERSION "2.0"
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
 #define OS_VERSION_SIZE 8
 #define MAX_DISPLAY_COUNT 4
 #define MAX_GPU_COUNT 4
+#define MAX_NETWORK_ADAPTER_COUNT 32
 
 #include <wchar.h>
 
@@ -26,6 +27,13 @@ typedef struct Graphics_Adapter{
     unsigned long long totalVRAM;
 
 } GPU;
+
+typedef struct Network_Adapters{
+
+    wchar_t networkAdapterName[128];
+    wchar_t networkAdapterDesc[256];
+
+} networkAdapter;
 
 typedef struct Windows_System_Information{
 
@@ -49,6 +57,9 @@ typedef struct Windows_System_Information{
 
     Display monitors[MAX_DISPLAY_COUNT];
     int displayCount;
+
+    size_t networkAdapterCount;
+    networkAdapter net_adapters[MAX_NETWORK_ADAPTER_COUNT];
 
 } WINBUN;
 

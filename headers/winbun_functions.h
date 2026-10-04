@@ -17,6 +17,7 @@ void getCurrentUsername(WINBUN* bun);
 void getHostName(WINBUN* bun);
 void getUptime(WINBUN* bun);
 void getLocale(WINBUN* bun);
+void getNetwork(WINBUN* bun);
 
 #ifdef __cplusplus
 }

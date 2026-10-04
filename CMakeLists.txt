@@ -11,6 +11,7 @@ add_library(winbun STATIC
     ./src/OS.c
     ./src/uptime.c
     ./src/username.c
+    ./src/network.c
 )
 
 target_include_directories(winbun PRIVATE ./headers/)

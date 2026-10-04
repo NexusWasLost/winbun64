@@ -2,7 +2,8 @@
 *.exe
 *.o
 *.zip
-*.cpp
+test.cpp
+test.c
 obj
 winbun64
 build/
