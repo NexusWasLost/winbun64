@@ -21,7 +21,7 @@ typedef struct Display_Monitors{
 
 } Display;
 
-typedef struct Graphics_Adapter{
+typedef struct Graphics_Adapters{
 
     wchar_t GPU_Name[128];
     unsigned long long totalVRAM;
