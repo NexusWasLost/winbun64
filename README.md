@@ -131,7 +131,6 @@ cmake --build build
 
 ## List of Fields and Functions
 
-
 | Field                                      | Type                              | Function                                                                                 | Description                              |
 | ------------------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------- |
 | `CPU`                                      | `char[]`                          | `getCPU()`                                                                               | CPU Brand String                         |
@@ -156,6 +155,19 @@ cmake --build build
 | `net_adapters`                             | `networkAdapter[]`                | `getNetwork()`                                                                           | List of active network adapters          |
 | `networkAdapterName`, `networkAdapterDesc` | `wchar_t[]`, `wchar_t[]`          | *calling `getNetwork()` automatically populates these 2 fields for each network adapter* | Network Adapter Name and Description     |
 | `networkAdapterCount`                      | `size_t`                          | `getNetwork()`                                                                           | Number of active network adapters        |
+
+Each function called once will populate every field related to that particular function. For example `getCPU()` will populate `CPU` and `CPU Architecture` field with just one call. Fields that can have multiple data for example GPU and Network Adapters follow the same rule.
+
+### Units
+
+| Field                        | Unit      |
+| ---------------------------- | --------- |
+| `uptime`                     | Seconds   |
+| `memory`                     | MB        |
+| `VRAM`                       | MB        |
+| Display `width` and `height` | Pixels    |
+| Display `refreshRate`        | Hz        |
+
 
 ## How Does it Work ?
 
