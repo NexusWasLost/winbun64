@@ -43,15 +43,12 @@ void getGPU(WINBUN* bun){
             continue;
         }
 
-        //looks a bit too cursed, so here is the explanation for the below line.
-        /*
-        bun->gpu is an array to GPU struct and we use bun->gpuCount as index.
-        bun->gpuCount is an integer.
-        Now gpu is a struct containing a wchar_t array called GPU_Name therefore passing it
-        to a function will result in a decay to a pointer and thats what memcpy expects.
-        */
-        memcpy(bun->gpu[bun->gpuCount].GPU_Name, desc.Description, 128);
-        bun->gpu[bun->gpuCount].GPU_Name[127] = L'\0';
+        //uses bun->gpuCount as the index
+        swprintf(
+            bun->gpu[bun->gpuCount].GPU_Name,
+            128, L"%ls",
+            desc.Description
+        );
         bun->gpu[bun->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));
         ++bun->gpuCount;
 
