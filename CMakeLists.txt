@@ -16,5 +16,5 @@ add_library(winbun STATIC
 
 target_include_directories(winbun PRIVATE ./headers/)
 
-# DXGI_FLAGS: -ldxgi -ldxguid -lole32
+# FLAGS: -ldxgi -ldxguid -lole32 -liphlpapi
 # These flags will be needed while building any executable using winbun64
