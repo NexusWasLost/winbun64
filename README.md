@@ -2,7 +2,7 @@
 
 WinBun64 is a lightweight C library for fetching system information on Windows.
 
-WinBun64 is written in C but is compatible with both C and C++.
+WinBun64 is written in C and compatible with C++ aswell.
 
 ## Supported Constraints
 
@@ -23,9 +23,9 @@ WinBun64 is shipped as a static library (`.a`) alongside headers files in an "in
 - `include/` - contains `winbun.h` and `winbun_functions.h`.
 - `lib/` - contains `libwinbun.a` (the actual library).
 
-To get started, download the library from [releases](https://github.com/NexusWasLost/winbun64/releases/).
+Download the library from [releases](https://github.com/NexusWasLost/winbun64/releases/).
 
-### 🔰 Example Code
+## Example Code
 
 ```c
 #include <stdio.h>
@@ -35,19 +35,26 @@ To get started, download the library from [releases](https://github.com/NexusWas
 int main(){
 	WINBUN bun; //define a WINBUN variable
 
+	printf("Version: ");
+	printf(__WINBUN_VERSION);
+	printf("\n");
+
 	getCPU(&bun); //call needed function
 	getMemory(&bun);
 	getDisplay(&bun);
+	getNetwork(&bun);
 
 	//print the info
 	printf("CPU: %s\n", bun.CPU);
 	printf("RAM: %llu MB / %llu MB\n", bun.usedMemory, bun.totalMemory);
 
 	//print all active displays.
-	printf("Resolution: ");
 	for(int x = 0; x < bun.displayCount; x++){
-        printf("%dx%d @ %dHz\n", bun.monitors[x].width, bun.monitors[x].height, bun.monitors[x].refreshRate);
-    }
+		printf("Display %d: %d x %d @ %d Hz\n",
+		 x + 1,
+		 bun.monitors[x].width, bun.monitors[x].height, bun.monitors[x].refreshRate
+		);
+	}
 
 	return 0;
 }
@@ -58,16 +65,14 @@ Each function populates a struct variable named `bun` with respective info.
 Assuming the code file is called `main.c`, Compile using `gcc`:
 
 ```shell
-gcc main.c -o main.exe -I"path-to-include-headers" -L"path-to-library" -lwinbun -ldxgi -ldxguid -lole32
+gcc main.c -o main.exe -I"path-to-include-headers" -L"path-to-library" -lwinbun -ldxgi -ldxguid -lole32 -liphlpapi
 ```
-
-**IMPORTANT:** WinBun64 depends on Windows provided Libraries such as `dxgi`, `dxguid` and `ole32` as it uses `DXGI` for GPU information therefore these needs to be linked while producing an `exe`.
 
 ## Building from Source
 
 The library can be built from source if needed.
 
-*Compiler:* GCC or Clang, make or mingw32-make for makefiles and CMake.
+*Compiler:* GCC or Clang Toolchain and CMake.
 
 1. Clone the repository
 
@@ -81,7 +86,7 @@ git clone https://github.com/NexusWasLost/winbun64.git
 cd winbun64
 ```
 
-### Using CMake (Recommended)
+### Build using CMake
 
 1. Initialize CMake
 ```shell
@@ -91,13 +96,6 @@ cmake -B build -G "MinGW Makefiles"
 2. Build the library (CMake creates it in build directory)
 ```shell
 cmake --build build
-```
-
-### Using Makefile
-
-1. Build  using Make
-```shell
-make
 ```
 
 ---
@@ -131,29 +129,33 @@ cmake --build build
 
 ---
 
-## 💎 List of Fields and Functions
+## List of Fields and Functions
 
-| Field                                   | Type                              | Populated by Function     | Description                              |
-| --------------------------------------- | --------------------------------- | ------------------------- | ---------------------------------------- |
-| `CPU`                                   | `char[]`                          | `getCPU()`                | CPU Brand String                         |
-| `CPU_Architecture`                      | `char[]`                          | `getCPU()`                | CPU Architecture                         |
-| `OS_ProductName`                        | `char[]`                          | `getOS()`                 | Windows Product Name                     |
-| `OS_version`                            | `char[]`                          | `getOS()`                 | OS version String                        |
-| `OS_buildNumber`                        | `char[]`                          | `getOS()`                 | Windows Build Number                     |
-| `host`                                  | `char[]`                          | `getHostName()`           | Computer Hostname                        |
-| `locale`                                | `wchar_t[]`                       | `getLocale()`             | System Locale                            |
-| `currentUserName`                       | `char[]`                          | `getCurrentUsername()`    | Logged in username                       |
-| `totalMemory`                           | `unsigned long long`              | `getMemory()`             | Total Physical Memory (in MB)            |
-| `availableMemory`                       | `unsigned long long`              | `getmemory()`             | Total Available Memory (in MB)           |
-| `usedMemory`                            | `unsigned long long`              | `getMemory()`             | Total Used Memory (in MB)                |
-| `memoryLoad`                            | `unsigned long long`               | `getMemory()`             | Current Memory Load (Percentage)         |
-| `uptime`                                | `unsigned long long`              | `getUptime()`             | System Uptime (in seconds)               |
-| `gpu`                                   | `GPU` struct Array                | `getGPU()`                | List of GPUs Detected                    |
-| `GPU (GPU_Name, totalVRAM)`             | `wchar_t[]`, `unsigned long long` | *within `GPU` struct*     | GPU Name and total VRAM                  |
-| `gpuCount`                              | `int`                             | `getGPU()`                | Total Number of GPUs Detected            |
-| `monitors`                              | `Display` struct Array            | `getDisplay()`            | Total Number of Monitors Detected        |
-| `Display (width, height, refresh rate)` | `int, int, int`                   | *within `Display` struct* | Monitor Resolution and Refresh Rate      |
-| `displayCount`                          | `int`                             | `getDisplay()`            | Total Number of Active Displays Detected |
+
+| Field                                      | Type                              | Function                                                                                 | Description                              |
+| ------------------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `CPU`                                      | `char[]`                          | `getCPU()`                                                                               | CPU Brand String                         |
+| `CPU_Architecture`                         | `char[]`                          | `getCPU()`                                                                               | CPU Architecture                         |
+| `OS_ProductName`                           | `char[]`                          | `getOS()`                                                                                | Windows Product Name                     |
+| `OS_version`                               | `char[]`                          | `getOS()`                                                                                | OS version String                        |
+| `OS_buildNumber`                           | `char[]`                          | `getOS()`                                                                                | Windows Build Number                     |
+| `host`                                     | `char[]`                          | `getHostName()`                                                                          | Computer Hostname                        |
+| `locale`                                   | `wchar_t[]`                       | `getLocale()`                                                                            | System Locale                            |
+| `currentUserName`                          | `char[]`                          | `getCurrentUsername()`                                                                   | Logged in username                       |
+| `totalMemory`                              | `unsigned long long`              | `getMemory()`                                                                            | Total Physical Memory (in MB)            |
+| `availableMemory`                          | `unsigned long long`              | `getMemory()`                                                                            | Total Available Memory (in MB)           |
+| `usedMemory`                               | `unsigned long long`              | `getMemory()`                                                                            | Total Used Memory (in MB)                |
+| `memoryLoad`                               | `unsigned long long`              | `getMemory()`                                                                            | Current Memory Load (Percentage)         |
+| `uptime`                                   | `unsigned long long`              | `getUptime()`                                                                            | System Uptime (in seconds)               |
+| `gpu`                                      | `GPU[]`                           | `getGPU()`                                                                               | List of GPUs Detected                    |
+| `GPU_Name`, `totalVRAM`                    | `wchar_t[]`, `unsigned long long` | *calling `getGPU()` automatically populates these 2 fields for each GPU*                 | GPU Name and total VRAM                  |
+| `gpuCount`                                 | `size_t`                             | `getGPU()`                                                                               | Total Number of GPUs Detected            |
+| `monitors`                                 | `Display[]`                       | `getDisplay()`                                                                           | Total Number of Monitors Detected        |
+| `width`, `height`, `refreshRate`           | `int, int, int`                   | *calling `getDisplay()` automatically populates these 3 fields for each monitor*         | Monitor Resolution and Refresh Rate      |
+| `displayCount`                             | `size_t`                             | `getDisplay()`                                                                           | Total Number of Active Displays Detected |
+| `net_adapters`                             | `networkAdapter[]`                | `getNetwork()`                                                                           | List of active network adapters          |
+| `networkAdapterName`, `networkAdapterDesc` | `wchar_t[]`, `wchar_t[]`          | *calling `getNetwork()` automatically populates these 2 fields for each network adapter* | Network Adapter Name and Description     |
+| `networkAdapterCount`                      | `size_t`                          | `getNetwork()`                                                                           | Number of active network adapters        |
 
 ## How Does it Work ?
 
@@ -204,14 +206,24 @@ Though not a full blown library it is a cool side project if considered. Learned
 
 ---
 
-## ℹ Credits, Tools and Additional Info
+## References
 
-- I used [chatGPT](https://chatgpt.com/) for 99% of the time to learn about WinAPI, `DXGI`, Registry Query and the whole project. I preferred chatGPT over Microsoft Docs because it was in a more "understandable" language. With that said I didn't copy paste code I wrote what I understood.
+- WinAPI reference: [https://learn.microsoft.com/en-us/windows/win32/api/](https://learn.microsoft.com/en-us/windows/win32/api/)
 
-- Other References - [Microsoft Docs](https://learn.microsoft.com/en-us/windows/win32/api/) (Yes I used it a bit), [Stack Overflow](https://stackoverflow.com/questions).
+- Network related API: [https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_lh](https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_lh)
+
+- `swprintf`: [https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/sprintf-sprintf-l-swprintf-swprintf-l-swprintf-l?view=msvc-170](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/sprintf-sprintf-l-swprintf-swprintf-l-swprintf-l?view=msvc-170)
+
+- Stack Overflow: [https://stackoverflow.com/questions](https://stackoverflow.com/questions)
+
+## Additional Info
 
 - WinBun64 used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
 
-- Thanks to [Arpan](https://github.com/arpank01) for testing it out, helped me find bugs and issues.
+- I did AI-assisted coding to learn about WinAPI, `DXGI`, Registry Query and the whole project. I preferred AI  over MS Docs in many cases because it was easier to understand the stuff. With that said I didn't copy paste code, I wrote what I understood.
 
 - I will *try* to keep this library updated as needed alongside the documentation.
+
+## Credits
+
+- Thanks to [Arpan](https://github.com/arpank01) for testing it out, helped me find bugs and issues.

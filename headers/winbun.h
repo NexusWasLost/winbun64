@@ -41,13 +41,13 @@ typedef struct Network_Adapters{
 typedef struct Windows_System_Information{
 
     char CPU[49];
+    char CPU_Architecture[8];
     char OS_ProductName[OS_PRODUCT_NAME_SIZE];
     char OS_version[OS_VERSION_SIZE];
     char OS_buildNumber[OS_BUILD_NUMBER_SIZE];
     char host[16];
     wchar_t locale[16];
     char currentUserName[32];
-    char CPU_Architecture[8];
 
     unsigned long long totalMemory;
     unsigned long long availableMemory;
@@ -56,13 +56,13 @@ typedef struct Windows_System_Information{
     unsigned long long uptime;
 
     GPU gpu[MAX_GPU_COUNT];
-    int gpuCount;
+    size_t gpuCount;
 
     Display monitors[MAX_DISPLAY_COUNT];
-    int displayCount;
+    size_t displayCount;
 
-    size_t networkAdapterCount;
     networkAdapter net_adapters[MAX_NETWORK_ADAPTER_COUNT];
+    size_t networkAdapterCount;
 
 } WINBUN;
 
