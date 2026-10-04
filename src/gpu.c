@@ -46,7 +46,7 @@ void getGPU(WINBUN* bun){
         //uses bun->gpuCount as the index
         swprintf(
             bun->gpu[bun->gpuCount].GPU_Name,
-            128, L"%ls",
+            GPU_NAME_SIZE, L"%ls",
             desc.Description
         );
         bun->gpu[bun->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));

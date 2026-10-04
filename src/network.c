@@ -67,13 +67,13 @@ void getNetwork(WINBUN* bun){
                 //copy the name
                 swprintf(
                     bun->net_adapters[connectedDeviceIdx].networkAdapterName,
-                    128, L"%ls",
+                    NETWORK_ADAPTER_NAME_SIZE, L"%ls",
                     pCurrAddresses->FriendlyName
                 );
                 //copy the description
                 swprintf(
                     bun->net_adapters[connectedDeviceIdx].networkAdapterDesc,
-                    256, L"%ls",
+                    NETWORK_ADAPTER_DESC_SIZE, L"%ls",
                     pCurrAddresses->Description
                 );
 
