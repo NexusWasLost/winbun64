@@ -1,32 +1,32 @@
 #include <stdio.h>
 #include <windows.h>
 #include <string.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void setOSProductName(int majorBuildNumber, WINBUN* bun, char* productName){
+void setOSProductName(int majorBuildNumber, LUMI* lumi, char* productName){
     if(majorBuildNumber >= 22000){
         //The string "Windows 11" is total 10 chars + 1 char ('\0') and we store it in an array.
         //Copy the 11 bytes and the last one 10th index is '\0'.
         //The 10th index in the productName array is the space after major windows number and we overwrite previous null terminator and continue to append from the space.
         char win11[11] = "Windows 11";
-        strncpy(bun->OS_ProductName, win11, 11);
-        strncpy(bun->OS_ProductName + 10, productName + 10, OS_PRODUCT_NAME_SIZE - 10);
+        strncpy(lumi->OS_ProductName, win11, 11);
+        strncpy(lumi->OS_ProductName + 10, productName + 10, OS_PRODUCT_NAME_SIZE - 10);
     }
     else{
-        strncpy(bun->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
+        strncpy(lumi->OS_ProductName, productName, OS_PRODUCT_NAME_SIZE);
     }
 }
 
-void setOSVersion(WINBUN* bun, char* versionNumber){
-    strncpy(bun->OS_version, versionNumber, OS_VERSION_SIZE);
+void setOSVersion(LUMI* lumi, char* versionNumber){
+    strncpy(lumi->OS_version, versionNumber, OS_VERSION_SIZE);
 }
 
-void setOSBuildNumber(WINBUN* bun, char* buildNumber){
-    strncpy(bun->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
+void setOSBuildNumber(LUMI* lumi, char* buildNumber){
+    strncpy(lumi->OS_buildNumber, buildNumber, OS_BUILD_NUMBER_SIZE);
 }
 
-void getOS(WINBUN* bun){
+void getOS(LUMI* lumi){
     HKEY hkey;
     char productName[64];
     char buildNumber[32];
@@ -113,13 +113,13 @@ void getOS(WINBUN* bun){
 
     //check major build for windows 11
     int major = atoi(buildNumber);
-    setOSProductName(major, bun, productName);
-    setOSVersion(bun, versionNumber);
-    setOSBuildNumber(bun, buildNumber);
+    setOSProductName(major, lumi, productName);
+    setOSVersion(lumi, versionNumber);
+    setOSBuildNumber(lumi, buildNumber);
 
-    bun->OS_ProductName[63] = '\0';
-    bun->OS_buildNumber[31] = '\0';
-    bun->OS_version[7] = '\0';
+    lumi->OS_ProductName[63] = '\0';
+    lumi->OS_buildNumber[31] = '\0';
+    lumi->OS_version[7] = '\0';
 
     RegCloseKey(hkey);
 }

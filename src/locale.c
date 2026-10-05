@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getLocale(WINBUN* bun){
+void getLocale(LUMI* lumi){
 
-    int lc = GetUserDefaultLocaleName(bun->locale, LOCALE_NAME_MAX_LENGTH);
+    int lc = GetUserDefaultLocaleName(lumi->locale, LOCALE_NAME_MAX_LENGTH);
     if(!lc){
         printf("Error Getting Locale...");
         return;

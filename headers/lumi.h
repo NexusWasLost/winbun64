@@ -1,8 +1,8 @@
 #pragma once
-#ifndef WINBUN_H
-#define WINBUN_H
+#ifndef LUMI_H
+#define LUMI_H
 
-#define __WINBUN_VERSION "2.2"
+#define __LUMI_VERSION "3.0"
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
@@ -64,6 +64,6 @@ typedef struct Windows_System_Information{
     networkAdapter net_adapters[MAX_NETWORK_ADAPTER_COUNT];
     size_t networkAdapterCount;
 
-} WINBUN;
+} LUMI;
 
 #endif

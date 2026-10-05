@@ -3,18 +3,18 @@
 #include <string.h>
 #include <winsock2.h>
 #include <iphlpapi.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
 #pragma comment(lib, "IPHLPAPI.lib")
 
 #define MAX_TRIES 3
 #define BASE_BUFFER_SIZE 15000
 
-void getNetwork(WINBUN* bun){
+void getNetwork(LUMI* lumi){
     DWORD dwRetVal = 0;
     unsigned int i = 0;
-    bun->networkAdapterCount = 0;
+    lumi->networkAdapterCount = 0;
 
     //This flag tells the API to reuturn list of IP address prefixes
     //This is an IP Prefix -> 192.168.0.1/24 (The last 24 means total of 256)
@@ -66,18 +66,18 @@ void getNetwork(WINBUN* bun){
 
                 //copy the name
                 swprintf(
-                    bun->net_adapters[connectedDeviceIdx].networkAdapterName,
+                    lumi->net_adapters[connectedDeviceIdx].networkAdapterName,
                     NETWORK_ADAPTER_NAME_SIZE, L"%ls",
                     pCurrAddresses->FriendlyName
                 );
                 //copy the description
                 swprintf(
-                    bun->net_adapters[connectedDeviceIdx].networkAdapterDesc,
+                    lumi->net_adapters[connectedDeviceIdx].networkAdapterDesc,
                     NETWORK_ADAPTER_DESC_SIZE, L"%ls",
                     pCurrAddresses->Description
                 );
 
-                bun->networkAdapterCount++;
+                lumi->networkAdapterCount++;
                 connectedDeviceIdx++;
             }
 

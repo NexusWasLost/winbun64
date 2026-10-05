@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <windows.h>
 #include <dxgi.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getGPU(WINBUN* bun){
+void getGPU(LUMI* lumi){
     IDXGIFactory1* factory = NULL;
 
     HRESULT result = CreateDXGIFactory1(&IID_IDXGIFactory1, (void**)&factory);
@@ -16,10 +16,10 @@ void getGPU(WINBUN* bun){
     //create adapter pointer
     IDXGIAdapter1* adapter = NULL;
     UINT index = 0;
-    bun->gpuCount = 0;
+    lumi->gpuCount = 0;
 
     while(TRUE){
-        if(bun->gpuCount >= MAX_GPU_COUNT) return;
+        if(lumi->gpuCount >= MAX_GPU_COUNT) return;
 
         HRESULT hr = factory->lpVtbl->EnumAdapters1(factory, index, &adapter);
 
@@ -43,14 +43,14 @@ void getGPU(WINBUN* bun){
             continue;
         }
 
-        //uses bun->gpuCount as the index
+        //uses lumi->gpuCount as the index
         swprintf(
-            bun->gpu[bun->gpuCount].GPU_Name,
+            lumi->gpu[lumi->gpuCount].GPU_Name,
             GPU_NAME_SIZE, L"%ls",
             desc.Description
         );
-        bun->gpu[bun->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));
-        ++bun->gpuCount;
+        lumi->gpu[lumi->gpuCount].totalVRAM = (desc.DedicatedVideoMemory / (1024ULL * 1024ULL));
+        ++lumi->gpuCount;
 
         adapter->lpVtbl->Release(adapter);
         adapter = NULL;

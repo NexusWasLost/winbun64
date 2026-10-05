@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <windows.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getMemory(WINBUN* bun){
+void getMemory(LUMI* lumi){
     MEMORYSTATUSEX mem;
     mem.dwLength = sizeof(mem);
 
@@ -12,9 +12,9 @@ void getMemory(WINBUN* bun){
         return;
     }
 
-    bun->totalMemory = mem.ullTotalPhys / (1024 * 1024);
-    bun->availableMemory = mem.ullAvailPhys / (1024 * 1024);
-    bun->memoryLoad = mem.dwMemoryLoad;
-    bun->usedMemory = bun->totalMemory - bun->availableMemory;
+    lumi->totalMemory = mem.ullTotalPhys / (1024 * 1024);
+    lumi->availableMemory = mem.ullAvailPhys / (1024 * 1024);
+    lumi->memoryLoad = mem.dwMemoryLoad;
+    lumi->usedMemory = lumi->totalMemory - lumi->availableMemory;
 
 }

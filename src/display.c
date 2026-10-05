@@ -1,9 +1,9 @@
 #include <windows.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getDisplay(WINBUN* bun){
-    bun->displayCount = 0;
+void getDisplay(LUMI* lumi){
+    lumi->displayCount = 0;
     DISPLAY_DEVICE disp = { 0 };
 
     disp.cb = sizeof(disp);
@@ -17,11 +17,11 @@ void getDisplay(WINBUN* bun){
         DEVMODE devmode = { 0 };
         devmode.dmSize = sizeof(DEVMODE);
         if (EnumDisplaySettings(disp.DeviceName, ENUM_CURRENT_SETTINGS, &devmode)){
-            //access each elements of the bun->monitor for the bun->displayCount index;
-            bun->monitors[bun->displayCount].height = devmode.dmPelsHeight;
-            bun->monitors[bun->displayCount].width = devmode.dmPelsWidth;
-            bun->monitors[bun->displayCount].refreshRate = devmode.dmDisplayFrequency;
-            bun->displayCount++;
+            //access each elements of the lumi->monitor for the lumi->displayCount index;
+            lumi->monitors[lumi->displayCount].height = devmode.dmPelsHeight;
+            lumi->monitors[lumi->displayCount].width = devmode.dmPelsWidth;
+            lumi->monitors[lumi->displayCount].refreshRate = devmode.dmDisplayFrequency;
+            lumi->displayCount++;
         }
     }
 }
