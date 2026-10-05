@@ -77,13 +77,13 @@ The library can be built from source if needed.
 1. Clone the repository
 
 ```shell
-git clone https://github.com/NexusWasLost/Lumi.git
+git clone https://github.com/NexusWasLost/lumi.git
 ```
 
 2. Navigate into the directory
 
 ```shell
-cd Lumi
+cd lumi
 ```
 
 ### Build using CMake
