@@ -1,8 +1,8 @@
-# WinBun64
+# Lumi
 
-WinBun64 is a lightweight C library for fetching system information on Windows.
+Lumi is a lightweight C library for fetching system information on Windows.
 
-WinBun64 is written in C and compatible with C++ aswell.
+Lumi is written in C and compatible with C++ aswell.
 
 ## Supported Constraints
 
@@ -14,45 +14,45 @@ WinBun64 is written in C and compatible with C++ aswell.
 
 - *Windows Version Tested:* Windows 11 and Windows 10 (may work on 7, 8, 8.1, Vista, XP; Not tested).
 
-- *Compilers:* WinBun64 is compiled using [GCC (MinGW)](https://nuwen.net/mingw.html) so its fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
+- *Compilers:* Lumi is compiled using [GCC (MinGW)](https://nuwen.net/mingw.html) so its fully supported; [Clang](https://clang.llvm.org/) should work (not tested); [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) **not supported** without changing source code and rebuild.
 
 ## Downloading the Library
 
-WinBun64 is shipped as a static library (`.a`) alongside headers files in an "include" folder.
+Lumi is shipped as a static library (`.a`) alongside headers files in an "include" folder.
 
-- `include/` - contains `winbun.h` and `winbun_functions.h`.
-- `lib/` - contains `libwinbun.a` (the actual library).
+- `include/` - contains `lumi.h` and `lumi_functions.h`.
+- `lib/` - contains `liblumi.a` (the actual library).
 
-Download the library from [releases](https://github.com/NexusWasLost/winbun64/releases/).
+Download the library from [releases](https://github.com/NexusWasLost/Lumi/releases/).
 
 ## Example Code
 
 ```c
 #include <stdio.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
 int main(){
-	WINBUN bun; //define a WINBUN variable
+	LUMI lumi; //define a LUMI variable
 
 	printf("Version: ");
-	printf(__WINBUN_VERSION);
+	printf(__LUMI_VERSION);
 	printf("\n");
 
-	getCPU(&bun); //call needed function
-	getMemory(&bun);
-	getDisplay(&bun);
-	getNetwork(&bun);
+	getCPU(&lumi); //call needed function
+	getMemory(&lumi);
+	getDisplay(&lumi);
+	getNetwork(&lumi);
 
 	//print the info
-	printf("CPU: %s\n", bun.CPU);
-	printf("RAM: %llu MB / %llu MB\n", bun.usedMemory, bun.totalMemory);
+	printf("CPU: %s\n", lumi.CPU);
+	printf("RAM: %llu MB / %llu MB\n", lumi.usedMemory, lumi.totalMemory);
 
 	//print all active displays.
-	for(int x = 0; x < bun.displayCount; x++){
+	for(int x = 0; x < lumi.displayCount; x++){
 		printf("Display %d: %d x %d @ %d Hz\n",
 		 x + 1,
-		 bun.monitors[x].width, bun.monitors[x].height, bun.monitors[x].refreshRate
+		 lumi.monitors[x].width, lumi.monitors[x].height, lumi.monitors[x].refreshRate
 		);
 	}
 
@@ -60,12 +60,12 @@ int main(){
 }
 ```
 
-Each function populates a struct variable named `bun` with respective info.
+Each function populates a struct variable named `lumi` with respective info.
 
 Assuming the code file is called `main.c`, Compile using `gcc`:
 
 ```shell
-gcc main.c -o main.exe -I"path-to-include-headers" -L"path-to-library" -lwinbun -ldxgi -ldxguid -lole32 -liphlpapi
+gcc main.c -o main.exe -I"path-to-include-headers" -L"path-to-library" -llumi -ldxgi -ldxguid -lole32 -liphlpapi
 ```
 
 ## Building from Source
@@ -77,13 +77,13 @@ The library can be built from source if needed.
 1. Clone the repository
 
 ```shell
-git clone https://github.com/NexusWasLost/winbun64.git
+git clone https://github.com/NexusWasLost/Lumi.git
 ```
 
 2. Navigate into the directory
 
 ```shell
-cd winbun64
+cd Lumi
 ```
 
 ### Build using CMake
@@ -108,7 +108,7 @@ cmake --build build
 ...
 #include <intrin.h> //include intrin.h instead of cpuid.h
 ...
-void getCPU(WINBUN* bun){
+void getCPU(LUMI* lumi){
 	...
 	int cpuBrandString[4];
 	for(int x = 0; x < 3; x++){
@@ -171,15 +171,15 @@ Each function called once will populate every field related to that particular f
 
 ## How Does it Work ?
 
-WinBun64 uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
-WinBun64 functions accepts a single parameter which is a pointer to a `WINBUN` struct (`WINBUN*`).
-The variable of type `WINBUN` is passed by address, and each function populates it with corresponding system information.
+Lumi uses a mix of WinAPI, Registry Query, `cpuid` and `DXGI` to get system information.
+Lumi functions accepts a single parameter which is a pointer to a `LUMI` struct (`LUMI*`).
+The variable of type `LUMI` is passed by address, and each function populates it with corresponding system information.
 
 ### 🔹 WinAPI
 
 The Windows API (WinAPI) is the native API provided by Microsoft to interact directly with the Operating System.
 
-WinBun64 uses a handful of lightweight WinAPI calls to fetch system level details like hostname, uptime, locale, etc. Functions such as `GetTickCount64()`(uptime), `GetUserNameA()`(username) and `GetComputerNameA()`(hostname) are directly used to extract these information.
+Lumi uses a handful of lightweight WinAPI calls to fetch system level details like hostname, uptime, locale, etc. Functions such as `GetTickCount64()`(uptime), `GetUserNameA()`(username) and `GetComputerNameA()`(hostname) are directly used to extract these information.
 
 The `GetNativeSystemInfo()` function is used to extract CPU architecture.
 
@@ -189,7 +189,7 @@ For getting display resolution and refresh rate of each available display `EnumD
 
 Windows registry is a hierarchical database storing config data for OS and installed software.
 
-WinBun64 queries specific registry keys to obtain necessary details like OS product name, version and build number.
+Lumi queries specific registry keys to obtain necessary details like OS product name, version and build number.
 
 It uses `RegOpenKeyExA()` and `RegQueryValueExA()` to read these keys safely from `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion`, avoiding the complexity of manual registry access.
 
@@ -197,13 +197,13 @@ It uses `RegOpenKeyExA()` and `RegQueryValueExA()` to read these keys safely fro
 
 DXGI is part of the DirectX family and provides API for Graphics and GPU related information.
 
-WinBun64 uses `DXGI` interfaces like `IDXGIFactory1()` and `IDXGIAdapter1()` to fetch GPU information such as GPU names, VRAM size and total number of adapters.
+Lumi uses `DXGI` interfaces like `IDXGIFactory1()` and `IDXGIAdapter1()` to fetch GPU information such as GPU names, VRAM size and total number of adapters.
 
 ### 🔹 CPUID
 
 `cpuid` is a processor instruction that returns detailed information about the CPU such as its Brand, features, etc.
 
-WinBun64 uses it to get the full CPU Brand String. Since it uses `cpuid` this limits WinBun64 to just x86 and x86_64 (AMD64) systems only.
+Lumi uses it to get the full CPU Brand String. Since it uses `cpuid` this limits Lumi to just x86 and x86_64 (AMD64) systems only.
 
 ---
 
@@ -230,7 +230,7 @@ Though not a full blown library it is a cool side project if considered. Learned
 
 ## Additional Info
 
-- WinBun64 used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
+- Lumi used `cpuid` to get processor brand so it will not work on ARM - based Windows machines.
 
 - I did AI-assisted coding to learn about WinAPI, `DXGI`, Registry Query and the whole project. I preferred AI  over MS Docs in many cases because it was easier to understand the stuff. With that said I didn't copy paste code, I wrote what I understood.
 

@@ -1,10 +1,10 @@
 #include <windows.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getUptime(WINBUN* bun){
+void getUptime(LUMI* lumi){
 
     ULONGLONG uptime = GetTickCount64();
-    bun->uptime = uptime;
+    lumi->uptime = uptime;
 
 }

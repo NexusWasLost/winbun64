@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
-#include "winbun.h"
-#include "winbun_functions.h"
+#include "lumi.h"
+#include "lumi_functions.h"
 
-void getCurrentUsername(WINBUN* bun){
-    DWORD size = sizeof(bun->currentUserName);
-    WINBOOL uName = GetUserNameA(bun->currentUserName, &size);
+void getCurrentUsername(LUMI* lumi){
+    DWORD size = sizeof(lumi->currentUserName);
+    WINBOOL uName = GetUserNameA(lumi->currentUserName, &size);
     if(!uName){
         printf("Error Getting Username...");
         return;

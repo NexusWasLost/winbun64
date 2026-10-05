@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 4.0)
-project(winbun64)
+project(lumi)
 
-add_library(winbun STATIC
+add_library(lumi STATIC
     ./src/cpu.c
     ./src/display.c
     ./src/gpu.c
@@ -14,7 +14,7 @@ add_library(winbun STATIC
     ./src/network.c
 )
 
-target_include_directories(winbun PRIVATE ./headers/)
+target_include_directories(lumi PRIVATE ./headers/)
 
 # FLAGS: -ldxgi -ldxguid -lole32 -liphlpapi
 # These flags will be needed while building any executable using winbun64
