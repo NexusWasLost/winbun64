@@ -20,6 +20,15 @@ typedef LONG (WINAPI *pfnNtQuerySystemInformation)(
 void getUptime(LUMI* lumi){
     lumi->uptime = 0;
 
+    /**
+     This one is sort of a wild thing I learned today
+     I wrote what I understood
+     So view my Rant here:
+
+     https://nexus.bearblog.dev/querying-uptime-in-c/
+
+     */
+
     HMODULE hNTDLL = GetModuleHandleA("ntdll.dll");
     if(!hNTDLL) return;
 
@@ -34,8 +43,8 @@ void getUptime(LUMI* lumi){
     LONG status = NtQuerySystemInformation(3, &timeInfo, sizeof(timeInfo), &returnLen);
     if(status == 0 && timeInfo.CurrentTime.QuadPart > timeInfo.BootTime.QuadPart){
         LONGLONG diff = timeInfo.CurrentTime.QuadPart - timeInfo.BootTime.QuadPart;
-        //diff is chunks of nano seconds (each chunk is 100ns) !
-        //Divide the div by 10,000,000 to get seconds
+        // diff is chunks of nano seconds (each chunk is 100ns) !
+        // Divide the div by 10,000,000 to get seconds
         // printf("Uptime: %llu\n", (unsigned long long)(diff / 10000000LL));
         lumi->uptime = (unsigned long long)(diff / 10000000LL);
     }
