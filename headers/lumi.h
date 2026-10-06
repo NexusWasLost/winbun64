@@ -2,7 +2,7 @@
 #ifndef LUMI_H
 #define LUMI_H
 
-#define __LUMI_VERSION "2.2"
+#define __LUMI_VERSION "3.1"
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
