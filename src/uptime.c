@@ -54,3 +54,7 @@ void getUptime(LUMI* lumi){
     }
 
 }
+
+void getKernelUptime(LUMI* lumi){
+    lumi->kernelUptime = GetTickCount64() / 1000ULL;
+}
