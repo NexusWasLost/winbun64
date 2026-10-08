@@ -2,7 +2,7 @@
 #ifndef LUMI_H
 #define LUMI_H
 
-#define __LUMI_VERSION "3.2"
+#define __LUMI_VERSION "3.3"
 
 #define OS_PRODUCT_NAME_SIZE 64
 #define OS_BUILD_NUMBER_SIZE 32
@@ -54,7 +54,6 @@ typedef struct Windows_System_Information{
     unsigned long long usedMemory;
     unsigned long long memoryLoad;
     unsigned long long uptime;
-    unsigned long long kernelUptime;
 
     GPU gpu[MAX_GPU_COUNT];
     size_t gpuCount;
